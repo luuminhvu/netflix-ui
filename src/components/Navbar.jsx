@@ -7,10 +7,10 @@ import { firebaseAuth } from '../utils/netflix-config';
 import { Link, useNavigate } from 'react-router-dom';
 const Navbar = ({ isScrolled }) => {
     const links = [
-        { name: 'Home', link: '/' },
-        { name: 'TV Shows', link: '/tv' },
-        { name: 'Movies', link: '/movies' },
-        { name: 'My Lists', link: '/mylist' },
+        { name: 'Trang chủ', link: '/' },
+        { name: 'Phim T.hình', link: '/tv' },
+        { name: 'Phim', link: '/movies' },
+        { name: 'Danh sách của tôi', link: '/mylist' },
     ];
     const navigate = useNavigate();
     onAuthStateChanged(firebaseAuth, (currentUser) => {
@@ -83,7 +83,6 @@ const Container = styled.div`
         padding: 0 4rem;
         align-items: center;
         transition: 0.3s ease-in-out;
-        background-color: black;
         .left {
             gap: 2rem;
             .brand {
