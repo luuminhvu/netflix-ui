@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
 import backgroundImage from '../assets/home.jpg';
@@ -6,9 +6,24 @@ import movieLogo from '../assets/homeTitle.webp';
 import { FaPlay } from 'react-icons/fa';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMovies, getGenres } from '../store';
+import Slider from '../components/Slider';
 
 const Netflix = () => {
+    const genresLoaded = useSelector((state) => state.Netflix.genresLoaded);
+    const movies = useSelector((state) => state.Netflix.movies);
     const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getGenres());
+    }, [dispatch]);
+    useEffect(() => {
+        if (genresLoaded) {
+            dispatch(fetchMovies({ type: 'all' }));
+        }
+    });
     const [isScrolled, setIsScrolled] = React.useState(false);
     window.onscroll = () => {
         setIsScrolled(window.pageYOffset === 0 ? false : true);
@@ -33,6 +48,7 @@ const Netflix = () => {
                     </div>
                 </div>
             </div>
+            <Slider title="Phổ biến" movies={movies} />
         </Container>
     );
 };
