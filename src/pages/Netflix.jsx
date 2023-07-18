@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
 import backgroundImage from '../assets/home.jpg';
@@ -14,7 +14,6 @@ const Netflix = () => {
     const genresLoaded = useSelector((state) => state.Netflix.genresLoaded);
     const movies = useSelector((state) => state.Netflix.movies);
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getGenres());
@@ -53,6 +52,7 @@ const Netflix = () => {
     );
 };
 const Container = styled.div`
+    background-color: black;
     .hero {
         position: relative;
         .background-image {
@@ -103,4 +103,4 @@ const Container = styled.div`
 
         }
 `;
-export default Netflix;
+export default memo(Netflix);
