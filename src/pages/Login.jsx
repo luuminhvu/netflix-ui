@@ -31,7 +31,7 @@ function Login() {
                 <div className="form-container flex column a-center j-center">
                     <div className="form flex column a-center j-center">
                         <div className="title">
-                            <h1>Đăng nhập</h1>
+                            <h3>Đăng nhập</h3>
                         </div>
                         <div className="container flex column">
                             <input
