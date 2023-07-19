@@ -7,10 +7,31 @@ import { RiThumbUpFill, RiThumbDownFill } from 'react-icons/ri';
 import { BiChevronDown } from 'react-icons/bi';
 import { BsCheck } from 'react-icons/bs';
 import video from '../assets/video.mp4';
+import { onAuthStateChanged } from 'firebase/auth';
+import { firebaseAuth } from '../utils/netflix-config';
+import axios from 'axios';
 
 const Card = ({ movieData, isLiked = false }) => {
     const [isHovered, setIsHovered] = React.useState(false);
     const navigate = useNavigate();
+    const [email, setEmail] = React.useState(undefined);
+    onAuthStateChanged(firebaseAuth, (user) => {
+        if (user) {
+            setEmail(user.email);
+        } else {
+            navigate('/login');
+        }
+    });
+    const AddToList = async () => {
+        try {
+            await axios.post('http://localhost:5000/api/user/add', {
+                email,
+                data: movieData,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <Container onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             <img src={`https://image.tmdb.org/t/p/w500/${movieData.image}`} alt="Movie Poster" />
@@ -45,7 +66,7 @@ const Card = ({ movieData, isLiked = false }) => {
                                 {isLiked ? (
                                     <BsCheck title="Xoá khỏi danh sách" />
                                 ) : (
-                                    <AiOutlinePlus title="Thêm vào danh sách" />
+                                    <AiOutlinePlus title="Thêm vào danh sách" onClick={AddToList} />
                                 )}
                             </div>
                             <div className="info">

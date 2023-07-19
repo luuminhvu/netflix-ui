@@ -10,7 +10,7 @@ import SelectGenres from '../components/SelectGenres';
 // import { onAuthStateChanged } from 'firebase/auth';
 // import { firebaseAuth } from '../utils/netflix-config';
 
-const Movies = () => {
+const TVShows = () => {
     const genresLoaded = useSelector((state) => state.Netflix.genresLoaded);
     const movies = useSelector((state) => state.Netflix.movies);
     const genres = useSelector((state) => state.Netflix.genres);
@@ -21,7 +21,7 @@ const Movies = () => {
     }, [dispatch]);
     useEffect(() => {
         if (genresLoaded) {
-            dispatch(fetchMovies({ genres, type: 'movies' }));
+            dispatch(fetchMovies({ genres, type: 'tv' }));
         }
     }, [genresLoaded, dispatch, genres]);
 
@@ -37,7 +37,7 @@ const Movies = () => {
             </div>
 
             <div className="data">
-                <SelectGenres genres={genres} type="movie" />
+                <SelectGenres genres={genres} type="tv" />
                 {movies.length ? <Slider movies={movies} /> : <NotAvailable />}
             </div>
         </Container>
@@ -54,4 +54,4 @@ const Container = styled.div`
     }
 `;
 
-export default Movies;
+export default TVShows;
