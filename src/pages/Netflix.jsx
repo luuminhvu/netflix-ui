@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMovies, getGenres } from '../store';
 import Slider from '../components/Slider';
+import { onAuthStateChanged } from 'firebase/auth';
+import { firebaseAuth } from '../utils/netflix-config';
 
 const Netflix = () => {
     const genresLoaded = useSelector((state) => state.Netflix.genresLoaded);
@@ -23,6 +25,11 @@ const Netflix = () => {
             dispatch(fetchMovies({ type: 'all' }));
         }
     });
+    const [email, setEmail] = React.useState(undefined);
+    onAuthStateChanged(firebaseAuth, (currentUser) => {
+        if (currentUser) setEmail(currentUser.email);
+        else navigate('/login');
+    });
     const [isScrolled, setIsScrolled] = React.useState(false);
     window.onscroll = () => {
         setIsScrolled(window.pageYOffset === 0 ? false : true);
@@ -30,7 +37,7 @@ const Netflix = () => {
     };
     return (
         <Container>
-            <Navbar isScrolled={isScrolled} />
+            <Navbar isScrolled={isScrolled} email={email} />
             <div className="hero">
                 <img src={backgroundImage} alt="Background" className="background-image" />
                 <div className="container">

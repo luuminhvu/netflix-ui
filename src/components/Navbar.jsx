@@ -5,7 +5,7 @@ import { FaPowerOff, FaSearch } from 'react-icons/fa';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { firebaseAuth } from '../utils/netflix-config';
 import { Link, useNavigate } from 'react-router-dom';
-const Navbar = ({ isScrolled }) => {
+const Navbar = ({ isScrolled, email }) => {
     const links = [
         { name: 'Trang chủ', link: '/' },
         { name: 'Phim T.hình', link: '/tv' },

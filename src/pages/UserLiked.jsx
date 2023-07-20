@@ -24,7 +24,7 @@ const UserLiked = () => {
         if (email) {
             dispatch(getUsersLikedMovies(email));
         }
-    }, [email]);
+    }, [email, dispatch]);
 
     window.onscroll = () => {
         setIsScrolled(window.pageYOffset === 0 ? false : true);
