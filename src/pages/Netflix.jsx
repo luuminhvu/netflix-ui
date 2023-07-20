@@ -19,12 +19,12 @@ const Netflix = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getGenres());
-    }, [dispatch]);
+    }, []);
     useEffect(() => {
         if (genresLoaded) {
             dispatch(fetchMovies({ type: 'all' }));
         }
-    });
+    }, [genresLoaded]);
     const [email, setEmail] = React.useState(undefined);
     onAuthStateChanged(firebaseAuth, (currentUser) => {
         if (currentUser) setEmail(currentUser.email);

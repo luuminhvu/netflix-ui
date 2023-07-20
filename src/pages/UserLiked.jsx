@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsersLikedMovies } from '../store';
 import { useNavigate } from 'react-router-dom';
@@ -63,4 +63,4 @@ const Container = styled.div`
     }
 `;
 
-export default UserLiked;
+export default memo(UserLiked);

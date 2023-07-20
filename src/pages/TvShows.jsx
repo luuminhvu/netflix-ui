@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { useNavigate } from 'react-router-dom';
 import { fetchMovies, getGenres } from '../store';
@@ -54,4 +54,4 @@ const Container = styled.div`
     }
 `;
 
-export default TVShows;
+export default memo(TVShows);
