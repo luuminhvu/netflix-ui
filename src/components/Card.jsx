@@ -10,11 +10,14 @@ import video from '../assets/video.mp4';
 import { onAuthStateChanged } from 'firebase/auth';
 import { firebaseAuth } from '../utils/netflix-config';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { removeMovieFromLiked } from '../store';
 
 const Card = ({ movieData, isLiked = false }) => {
     const [isHovered, setIsHovered] = React.useState(false);
     const navigate = useNavigate();
     const [email, setEmail] = React.useState(undefined);
+    const dispatch = useDispatch();
     onAuthStateChanged(firebaseAuth, (user) => {
         if (user) {
             setEmail(user.email);
@@ -64,7 +67,10 @@ const Card = ({ movieData, isLiked = false }) => {
                                 <RiThumbUpFill title="Thích" />
                                 <RiThumbDownFill title="Không thích" />
                                 {isLiked ? (
-                                    <BsCheck title="Xoá khỏi danh sách" />
+                                    <BsCheck
+                                        title="Xoá khỏi danh sách"
+                                        onClick={() => dispatch(removeMovieFromLiked({ movieId: movieData.id, email }))}
+                                    />
                                 ) : (
                                     <AiOutlinePlus title="Thêm vào danh sách" onClick={AddToList} />
                                 )}

@@ -5,6 +5,7 @@ import Netflix from './pages/Netflix';
 import Player from './pages/Player';
 import TVShows from './pages/TvShows';
 import Movies from './pages/Movies';
+import UserLiked from './pages/UserLiked';
 export default function App() {
     return (
         <BrowserRouter>
@@ -13,6 +14,7 @@ export default function App() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/player" element={<Player />} />
                 <Route path="/tv" element={<TVShows />} />
+                <Route path="/mylist" element={<UserLiked />} />
                 <Route path="/movies" element={<Movies />} />
                 <Route path="/" element={<Netflix />} />
             </Routes>
