@@ -27,7 +27,7 @@ const Card = ({ movieData, isLiked = false }) => {
     });
     const AddToList = async () => {
         try {
-            await axios.post('http://localhost:5000/api/user/add', {
+            await axios.post('https://netflixapi-blym.onrender.com/api/user/add', {
                 email,
                 data: movieData,
             });
